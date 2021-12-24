@@ -1,0 +1,114 @@
+-- Start
+
+print [[
+<--- Local Time ------------------------
+----            SPRINTING MOD V1                ----
+
+-- Infinity Modding API has loaded!
+-- Infinity AntiCheat bypass has loaded!
+-- Infinity AutoUpdater detected (0) active updates
+-- Local WalkSpeed modified to (80)
+----------------------------------------------------
+Thanks for choosing infinity!
+----------------------------------------------------
+]]
+
+wait (1)
+
+local userInput = game:GetService("UserInputService")
+
+local players = game:GetService("Players")
+
+
+
+local sprintSpeed = 80
+
+local walkSpeed = 16 
+
+
+
+local player = players.LocalPlayer
+
+
+
+local function beginSprint(input, gameProcessed)
+
+    if not gameProcessed then        
+
+        if input.UserInputType == Enum.UserInputType.Keyboard then
+
+            local keycode = input.KeyCode
+
+            if keycode == Enum.KeyCode.LeftShift then 
+
+                player.Character.Humanoid.WalkSpeed = sprintSpeed
+
+            end
+
+        end
+
+    end
+
+end
+
+
+
+local function endSprint(input, gameProcessed)
+
+    if not gameProcessed then
+
+        if input.UserInputType == Enum.UserInputType.Keyboard then
+
+            local keycode = input.KeyCode
+
+            if keycode == Enum.KeyCode.LeftShift then
+
+                player.Character.Humanoid.WalkSpeed = walkSpeed
+
+            end
+
+        end
+
+    end
+
+end
+
+
+
+userInput.InputBegan:Connect(beginSprint)
+
+userInput.InputEnded:Connect(endSprint)
+
+-- Notification
+
+local function callback(Text)
+end
+ 
+local NotificationBindable = Instance.new("BindableFunction")
+NotificationBindable.OnInvoke = callback
+ 
+game.StarterGui:SetCore("SendNotification", {
+    Title = "INFINITY SPRINTING MOD";
+    Text = [[
+Sprinting Modification
+has fully loaded, welcome
+C:/]];
+    Duration = "5";
+    Callback = NotificationBindable;
+})
+
+-- Sound Player
+
+local s = Instance.new("Sound")
+ 
+s.Name = "Sound"
+s.SoundId = "http://www.roblox.com/asset/?id=1788243907"
+s.Volume = 0.5
+s.Looped = false
+s.archivable = false
+ 
+s.Parent = game.Workspace
+ 
+wait(0.1)
+ 
+s:play()
